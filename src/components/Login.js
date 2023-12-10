@@ -21,7 +21,7 @@ function Login() {
                             <form>
                                 <div className="mb-3">
                                     <label htmlFor="username" className="form-label">
-                                        Username
+                                        Handle
                                     </label>
                                     <input
                                         type="text"
