@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import './Login.css';
 
+
+// TODO: Refactor this entire component, drop bootstrap, and make your own css instead
+
+
 function Login() {
     const [handle, setUsername] = useState('');
     const [password, setPassword] = useState('');

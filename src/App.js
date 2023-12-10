@@ -2,6 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from "./components/Login";
 
+
+// TODO: Figure out how to do redirecting to different pages, and restrict access to pages if not authenticated
+
 function Dashboard() {
     return (
         <>
