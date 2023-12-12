@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from "./components/Login";
-import ProblemCard from "./components/ProblemCard";
-
+import RecommendedProblemsPage from "./pages/RecommendedProblemsPage";
 
 // TODO: Figure out how to do redirecting to different pages, and restrict access to pages if not authenticated
 
@@ -28,7 +27,7 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={
-                    <ProblemCard/>
+                    <RecommendedProblemsPage/>
                 } />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
