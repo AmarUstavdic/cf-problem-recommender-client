@@ -1,0 +1,56 @@
+.problem-card-container {
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch; /* Make children stretch to the same height */
+
+    background-color: #2b2b2b;
+    border-radius: 20px;
+    border: 2px solid #454545;
+    padding: 10px 20px 20px;
+    width: 80%;
+}
+
+.problem-context-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start; /* Align to the left */
+    height: 100%; /* Set the height to 100% */
+}
+
+.problem-tags-container {
+    display: flex;
+    gap: 15px;
+    flex-direction: row;
+}
+
+.problem-tag {
+    background-color: #4caf50;
+    color: #ffffff;
+    border-radius: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.problem-title {
+    color: #4caf50; /* Accent color for the title */
+}
+
+.btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
