@@ -2,6 +2,20 @@ import { useEffect, useState } from "react";
 import MonacoEditor from "react-monaco-editor";
 import "./WorkspacePage.css";
 
+
+const MonacoEnvironment = {
+    getWorkerUrl: function (_moduleId, label) {
+        if (label === "json") {
+            return "./json.worker.bundle.js";
+        }
+        if (label === "cpp" || label === "css" || label === "html" || label === "javascript") {
+            return "./editor.worker.bundle.js";
+        }
+        return "./editor.worker.bundle.js";
+    },
+};
+
+
 function WorkspacePage() {
 
     const [code, setCode] = useState("// Write your code here");
@@ -76,6 +90,7 @@ function WorkspacePage() {
     const containerStyle = {
         display: "flex",
         flexDirection: "row",
+        margin: "30px"
 
     }
 
@@ -94,13 +109,46 @@ function WorkspacePage() {
                 width={`${twoWidth}%`}
                 height="100vh"
                 language="cpp"
-                theme="vs-dark"
+                theme="vs-dark" // Use your preferred theme, e.g., "vs-light", "hc-black", etc.
                 value={code}
                 options={{
-                    selectOnLineNumbers: true,
+                    fontSize: 24, // Set the font size
+                    lineHeight: 24, // Set the line height
+                    fontFamily: "Menlo, Monaco, 'Courier New', monospace", // Set the font family
+                    minimap: {
+                        enabled: true, // Disable the minimap
+                    },
+                    wordWrap: "on", // Enable word wrap
+                    tabSize: 2, // Set the tab size
+                    renderIndentGuides: true, // Enable indent guides
+                    renderLineHighlight: "all", // Highlight the entire line
+                    rulers: [80], // Show a ruler at column 80
+                    glyphMargin: true, // Show the glyph margin for line numbers
+                    lineNumbersMinChars: 3, // Set the minimum number of characters to display for line numbers
+                    folding: true, // Enable code folding
+                    contextmenu: false, // Disable the context menu
+                    suggestOnTriggerCharacters: true, // Show suggestions on trigger characters
+                    autoClosingBrackets: "always", // Automatically close brackets
+                    autoClosingQuotes: "always", // Automatically close quotes
+                    autoIndent: "full", // Enable auto-indentation
+                    formatOnType: true, // Format code as you type
+                    formatOnPaste: true, // Format code when pasting
                 }}
-                onChange={handleCodeChange}
+                editorDidMount={(editor, monaco) => {
+                    // Access the editor instance and monaco API
+                    // You can perform additional customization here if needed
+                }}
+                onChange={setCode}
+                requireConfig={{
+                    url: "https://unpkg.com/monaco-editor@0.27.0/min/vs/loader.js",
+                    paths: {
+                        vs: "https://unpkg.com/monaco-editor@0.27.0/min/vs",
+                    },
+                }}
+                context={null}
+                environment={MonacoEnvironment}
             />
+
 
         </div>
     );
