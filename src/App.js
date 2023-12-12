@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from "./components/Login";
 import ProblemCard from "./components/ProblemCard";
 import WorkspacePage from "./pages/WorkspacePage";
+import HeatMap from "./components/HeatMap";
 
 
 // TODO: Figure out how to do redirecting to different pages, and restrict access to pages if not authenticated
@@ -28,12 +29,10 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={
-                    <ProblemCard/>
-                } />
+                <Route path="/login" element={ <Login /> } />
+                <Route path="/recommended-problems" element={ <> recommended problems </> } />
+                <Route path="/dashboard" element={ <Dashboard /> } />
                 <Route path="/workspace" element={ <WorkspacePage/> } />
-                <Route path="/login" element={<Login />} />
-                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="*" element={<NotFoundComponent />} />
             </Routes>
         </Router>
