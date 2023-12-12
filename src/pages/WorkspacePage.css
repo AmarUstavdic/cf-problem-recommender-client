@@ -1,0 +1,37 @@
+.workspace-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh; /* Use 100% of the viewport height */
+}
+
+.problem-description-container,
+.monaco-editor-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.problem-description {
+    padding: 10px;
+}
+
+.slider {
+    width: 10px;
+    cursor: ew-resize;
+    background-color: #ddd;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.monaco-editor-container {
+    border-left: 1px solid #ddd;
+    padding-left: 10px; /* Adjust as needed */
+}
+
+@media (max-width: 768px) {
+    .workspace-container {
+        flex-direction: column;
+    }
+}
