@@ -1,27 +1,38 @@
 import { useEffect, useState } from "react";
 import MonacoEditor from "react-monaco-editor";
 import "./WorkspacePage.css";
+import * as monaco from 'monaco-editor';
 
 
-const MonacoEnvironment = {
-    getWorkerUrl: function (_moduleId, label) {
-        if (label === "json") {
-            return "./json.worker.bundle.js";
-        }
-        if (label === "cpp" || label === "css" || label === "html" || label === "javascript") {
-            return "./editor.worker.bundle.js";
-        }
-        return "./editor.worker.bundle.js";
-    },
-};
 
 
 function WorkspacePage() {
 
-    const [code, setCode] = useState("// Write your code here");
+    const [code, setCode] = useState("#include <bits/stdc++.h>\n" +
+        "using namespace std;\n" +
+        "\n" +
+        "#define FF ios_base::sync_with_stdio(0); cin.tie(0);\n" +
+        "\n" +
+        "int main() {\n" +
+        "\tFF; \n" +
+        "\t\n" +
+        "\treturn 0;\n" +
+        "}");
     const handleCodeChange = (newCode) => {
         setCode(newCode);
     };
+
+
+    useEffect(() => {
+        monaco.editor.defineTheme('my-theme', {
+            base: 'vs-dark',
+            inherit: true,
+            rules: [],
+            colors: {
+                'editor.background': '#111827',
+            },
+        });
+    }, []);
 
 
     const dividerWidth = 0.5;
@@ -52,7 +63,7 @@ function WorkspacePage() {
             const newTwoWidth = 100 - newOneWidth;
 
             // Ensure the divider doesn't go beyond certain limits
-            if (newOneWidth > 20 && newTwoWidth > 20) {
+            if (newOneWidth > 40 && newTwoWidth > 40) {
                 setOneWidth(newOneWidth);
                 setTwoWidth(newTwoWidth);
             }
@@ -75,24 +86,27 @@ function WorkspacePage() {
 
     const dividerStyle = {
         width: `${dividerWidth}%`,
-        height: `100vh`,
-        backgroundColor: "red",
+        height: `90vh`,
+        backgroundColor: "#2F3543",
         cursor: "col-resize",
     };
 
     const divOneStyle = {
         width: `${oneWidth}%`,
-        height: `100vh`,
-        backgroundColor: "green",
+        height: `90vh`,
+        backgroundColor: "#111827",
         overflow: "hidden",
     };
 
     const containerStyle = {
         display: "flex",
         flexDirection: "row",
-        margin: "30px"
+        borderRadius: "20px",
+        overflow: "hidden",
+        border: "1px solid #2F3543",
+        margin: "20px"
+    };
 
-    }
 
     return (
         <div style={containerStyle}>
@@ -107,46 +121,13 @@ function WorkspacePage() {
 
             <MonacoEditor
                 width={`${twoWidth}%`}
-                height="100vh"
+                height="90vh"
                 language="cpp"
-                theme="vs-dark" // Use your preferred theme, e.g., "vs-light", "hc-black", etc.
+                theme="my-theme"
                 value={code}
-                options={{
-                    fontSize: 24, // Set the font size
-                    lineHeight: 24, // Set the line height
-                    fontFamily: "Menlo, Monaco, 'Courier New', monospace", // Set the font family
-                    minimap: {
-                        enabled: true, // Disable the minimap
-                    },
-                    wordWrap: "on", // Enable word wrap
-                    tabSize: 2, // Set the tab size
-                    renderIndentGuides: true, // Enable indent guides
-                    renderLineHighlight: "all", // Highlight the entire line
-                    rulers: [80], // Show a ruler at column 80
-                    glyphMargin: true, // Show the glyph margin for line numbers
-                    lineNumbersMinChars: 3, // Set the minimum number of characters to display for line numbers
-                    folding: true, // Enable code folding
-                    contextmenu: false, // Disable the context menu
-                    suggestOnTriggerCharacters: true, // Show suggestions on trigger characters
-                    autoClosingBrackets: "always", // Automatically close brackets
-                    autoClosingQuotes: "always", // Automatically close quotes
-                    autoIndent: "full", // Enable auto-indentation
-                    formatOnType: true, // Format code as you type
-                    formatOnPaste: true, // Format code when pasting
-                }}
-                editorDidMount={(editor, monaco) => {
-                    // Access the editor instance and monaco API
-                    // You can perform additional customization here if needed
-                }}
-                onChange={setCode}
-                requireConfig={{
-                    url: "https://unpkg.com/monaco-editor@0.27.0/min/vs/loader.js",
-                    paths: {
-                        vs: "https://unpkg.com/monaco-editor@0.27.0/min/vs",
-                    },
-                }}
-                context={null}
-                environment={MonacoEnvironment}
+                options={
+                    {fontSize: 24}
+                }
             />
 
 
